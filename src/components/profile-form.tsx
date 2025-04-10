@@ -30,19 +30,19 @@ export function ProfileForm() {
 
       utils.user.getUsernames.setData(undefined, (old) => [
         newUser.username,
-        ...(old || []),
+        ...(old ?? []),
       ]);
 
       return { prevUsernames };
     },
 
     onSuccess: async () => {
-      utils.user.getUsernames.invalidate();
+      await utils.user.getUsernames.invalidate();
       form.reset();
       toast("Successfully created user!");
     },
 
-    onError: ({ message: description, data: error }, _newUser, context) => {
+    onError: ({ message: description }, _newUser, context) => {
       if (context?.prevUsernames) {
         utils.user.getUsernames.setData(undefined, context.prevUsernames);
       }
@@ -59,8 +59,8 @@ export function ProfileForm() {
       });
     },
 
-    onSettled: () => {
-      utils.user.getUsernames.invalidate();
+    onSettled: async () => {
+      await utils.user.getUsernames.invalidate();
     },
   });
 

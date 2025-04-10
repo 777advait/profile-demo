@@ -7,7 +7,7 @@ export function cleanNulls<T extends Record<string, any>>(
 
   for (const key in obj) {
     const value = obj[key];
-    result[key] = value === null ? undefined : value;
+    result[key] = value ?? undefined;
   }
 
   return result;
