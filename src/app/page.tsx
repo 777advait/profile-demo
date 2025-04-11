@@ -5,6 +5,8 @@ import { ProfileForm } from "~/components/profile-form";
 import ProfileList from "~/components/profile-list";
 import { api, HydrateClient } from "~/trpc/server";
 
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   void api.user.getUsernames.prefetch();
 
