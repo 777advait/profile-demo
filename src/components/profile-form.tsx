@@ -11,7 +11,7 @@ import { ArrowRight } from "lucide-react";
 import { Button, ButtonLoading } from "./ui/button";
 import { api } from "~/trpc/react";
 import { toast } from "sonner";
-import { Textarea } from "./ui/textarea";
+import RichTextEditor from "./tiptap";
 
 export function ProfileForm() {
   const form = useForm<z.infer<typeof UserSchema>>({
@@ -23,7 +23,7 @@ export function ProfileForm() {
   });
 
   const utils = api.useUtils();
-  const { mutateAsync: addUser } = api.user.addUser.useMutation({
+  const { mutateAsync: addUser, isPending } = api.user.addUser.useMutation({
     onMutate: async (newUser) => {
       await utils.user.getUsernames.cancel();
       const prevUsernames = utils.user.getUsernames.getData();
@@ -193,10 +193,10 @@ export function ProfileForm() {
               <FormComponent.FormLabel>About</FormComponent.FormLabel>
               <FormComponent.FormControl>
                 <div className="w-full rounded-2xl">
-                  <Textarea
-                    autoComplete="off"
-                    {...field}
+                  <RichTextEditor
                     placeholder="A short bio..."
+                    currentContent={form.getValues("about") as string}
+                    onChange={field.onChange}
                   />
                 </div>
               </FormComponent.FormControl>
@@ -205,7 +205,7 @@ export function ProfileForm() {
           )}
         />
         <div className="flex justify-end">
-          {form.formState.isSubmitting ? (
+          {isPending ? (
             <ButtonLoading>Creating...</ButtonLoading>
           ) : (
             <Button>

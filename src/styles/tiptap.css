@@ -1,0 +1,37 @@
+@import url("~/styles/globals.css");
+@import "tailwindcss";
+
+.tiptap :first-child {
+  margin-top: 0;
+}
+
+.tiptap ul,
+.tiptap ol {
+  padding: 0 1rem;
+  margin: 1.25rem 1rem 1.25rem 0.4rem;
+}
+.tiptap ul li p,
+.tiptap ol li p {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+.tiptap ul {
+  list-style: disc;
+}
+
+.tiptap ol {
+  list-style: decimal;
+}
+
+.tiptap a {
+  @apply font-medium text-[var(--color-secondary-foreground)]/75 underline underline-offset-2;
+}
+
+.tiptap p.is-empty::before {
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+  color: var(--color-muted-foreground);
+}

@@ -17,7 +17,7 @@ export const userSchema = sqliteTable(
     location: text(),
     pronouns: text(),
     website: text(),
-    about: text(),
+    about: text({ mode: "json" }),
     created_at: integer({ mode: "timestamp_ms" }).default(
       sql`(current_timestamp)`,
     ),

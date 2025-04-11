@@ -17,7 +17,6 @@ export default class UserRepository implements IUserRepository {
     try {
       const user = await this.db.query.userSchema.findFirst({
         where: ({ username: dbUsername }, { eq }) => eq(dbUsername, username),
-        orderBy: ({ created_at }, { desc }) => desc(created_at),
       });
 
       if (!user) {
@@ -78,6 +77,7 @@ export default class UserRepository implements IUserRepository {
       return (
         await this.db.query.userSchema.findMany({
           columns: { username: true },
+          orderBy: ({ created_at }, { desc }) => desc(created_at),
         })
       ).map((record) => record.username);
     } catch (error) {
