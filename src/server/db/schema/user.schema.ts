@@ -4,7 +4,7 @@ import {
   text,
   uniqueIndex,
 } from "drizzle-orm/sqlite-core";
-import { idLike } from "./column.helpers";
+import { idLike } from "../column.helpers";
 import { sql } from "drizzle-orm";
 
 export const userSchema = sqliteTable(
