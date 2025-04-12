@@ -1,6 +1,8 @@
 import { UserSchema } from "~/utils/types/user.types";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 import { z } from "zod";
+import { createAvatar } from "@dicebear/core";
+import { glass } from "@dicebear/collection";
 
 export const userRouter = createTRPCRouter({
   getUserByUsername: publicProcedure
@@ -24,5 +26,11 @@ export const userRouter = createTRPCRouter({
     .query(
       async ({ ctx: { repository } }) =>
         await repository.userRepository.getUsernames(),
+    ),
+
+  getUserAvatar: publicProcedure
+    .input(z.object({ name: z.string() }))
+    .query(({ input: { name } }) =>
+      createAvatar(glass, { seed: name }).toDataUri(),
     ),
 });

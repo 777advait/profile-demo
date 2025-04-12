@@ -9,6 +9,7 @@ import { extensions } from "./tiptap";
 
 export default function ProfileHeader({ username }: { username: string }) {
   const [user] = api.user.getUserByUsername.useSuspenseQuery({ username });
+  const [avatar] = api.user.getUserAvatar.useSuspenseQuery({ name: user.name });
 
   const editor = useEditor({
     extensions,
@@ -26,7 +27,8 @@ export default function ProfileHeader({ username }: { username: string }) {
     <div className="space-y-12">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
-          <AvatarComponent.Avatar className="size-24">
+          <AvatarComponent.Avatar className="border-ring size-24 border">
+            <AvatarComponent.AvatarImage src={avatar} alt={user.username} />
             <AvatarComponent.AvatarFallback>
               {username[0]}
             </AvatarComponent.AvatarFallback>

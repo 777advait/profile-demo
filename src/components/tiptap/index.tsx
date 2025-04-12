@@ -63,7 +63,7 @@ export default function RichTextEditor({
     editorProps: {
       attributes: {
         class:
-          "tiptap rounded-b-md md:text-sm min-h-[150px] border border-input bg-transparent p-2.5 transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+          "tiptap rounded-b-md md:text-sm min-h-[150px] border border-input bg-transparent p-2.5 transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 shadow-xs",
       },
     },
   });
