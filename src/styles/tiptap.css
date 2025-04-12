@@ -25,7 +25,7 @@
 }
 
 .tiptap a {
-  @apply font-medium text-[var(--color-secondary-foreground)]/75 underline underline-offset-2;
+  @apply font-medium underline underline-offset-2;
 }
 
 .tiptap p.is-empty::before {

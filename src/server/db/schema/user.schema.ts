@@ -13,7 +13,7 @@ export const userSchema = sqliteTable(
     id: idLike(),
     name: text().notNull(),
     username: text().notNull().unique(),
-    bio: text(),
+    work: text(),
     location: text(),
     pronouns: text(),
     website: text(),

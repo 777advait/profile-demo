@@ -17,6 +17,23 @@ import {
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 
+export const extensions = [
+  StarterKit.configure({
+    blockquote: false,
+    bold: false,
+    italic: false,
+    code: false,
+    codeBlock: false,
+    heading: false,
+    horizontalRule: false,
+    strike: false,
+    hardBreak: false,
+  }),
+  Link.configure({
+    protocols: ["https", "mailto"],
+  }),
+];
+
 export default function RichTextEditor({
   placeholder,
   currentContent,
@@ -30,37 +47,23 @@ export default function RichTextEditor({
   const [linkText, setLinkText] = useState("");
   const [isLinkPopoverOpen, setIsLinkPopoverOpen] = useState(false);
 
-  const extensions = [
-    StarterKit.configure({
-      blockquote: false,
-      bold: false,
-      italic: false,
-      code: false,
-      codeBlock: false,
-      heading: false,
-      horizontalRule: false,
-      strike: false,
-    }),
-    Link.configure({
-      protocols: ["https", "mailto"],
-    }),
-    Placeholder.configure({
-      placeholder,
-      emptyEditorClass: "is-editor-empty",
-    }),
-  ];
-
   const editor = useEditor({
     immediatelyRender: false,
-    extensions,
-    content: currentContent,
+    extensions: [
+      ...extensions,
+      Placeholder.configure({
+        placeholder,
+        emptyEditorClass: "is-editor-empty",
+      }),
+    ],
+    content: "",
     onUpdate: ({ editor }) => {
       onChange(JSON.stringify(editor.getJSON()));
     },
     editorProps: {
       attributes: {
         class:
-          "tiptap border-input placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 flex field-sizing-content min-h-[150px] w-full rounded-b-md border bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[1.5px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm border-t-none",
+          "tiptap rounded-b-md md:text-sm min-h-[150px] border border-input bg-transparent p-2.5 transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
       },
     },
   });

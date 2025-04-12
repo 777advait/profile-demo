@@ -35,7 +35,8 @@ export default async function HomePage() {
                 </React.Suspense>
               </ErrorBoundary>
             </div>
-            <div>
+            <div className="space-y-4">
+              <h1 className="text-2xl font-semibold">Create profile:</h1>
               <ProfileForm />
             </div>
           </div>

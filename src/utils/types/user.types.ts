@@ -19,7 +19,7 @@ export const UserSchema = z.object({
         "Username must not contain special characters except underscore and period",
     })
     .transform((val) => val.trim().toLowerCase()),
-  bio: z
+  work: z
     .string()
     .min(1, { message: "Bio is required" })
     .max(48, { message: "Bio must be less than 48 characters" })

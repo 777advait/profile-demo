@@ -11,7 +11,8 @@ import { ArrowRight } from "lucide-react";
 import { Button, ButtonLoading } from "./ui/button";
 import { api } from "~/trpc/react";
 import { toast } from "sonner";
-import RichTextEditor from "./tiptap";
+import RichTextEditor, { extensions } from "./tiptap";
+import { generateHTML } from "@tiptap/react";
 
 export function ProfileForm() {
   const form = useForm<z.infer<typeof UserSchema>>({
@@ -110,7 +111,7 @@ export function ProfileForm() {
           )}
         />
         <FormComponent.FormField
-          name="bio"
+          name="work"
           control={form.control}
           render={({ field }) => (
             <FormComponent.FormItem className="w-full">
