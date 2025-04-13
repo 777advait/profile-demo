@@ -1,29 +1,27 @@
-# Create T3 App
+This project serves as a demonstration of my development practices, workflows, the tools I use, and the principles I follow while building applications. Whether you're a seasoned developer or just starting out, I hope you find this repository insightful.
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+## Tech Stack
 
-## What's next? How do I make an app with this?
+### Frontend
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+- **Next.js**: The industry-standard!.
+- **TypeScript**: For type safety and better developer experience.
+- **Tailwind CSS**: No way you write vanilla CSS in 2025.
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+### Backend
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+- **tRPC**: A framework for building type-safe APIs with TypeScript.
+- **Drizzle ORM**: An ORM for managing database interactions seamlessly.
+- **SQLite (LibSQL via turso)**: A lightweight database for development and testing.
 
-## Learn More
+### Development Tools
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+- **Prettier**: For automatic code formatting.
+- **Zod**: For schema validation and TypeScript inference.
+- **Sonner**: A toast notification library for user feedback.
+- **t3-env**: For managing environment variables.
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+## Infra
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+- **Cloudflare Workers**: For deploying my tRPC procedures.
+- **Vercel**: For deploying my Next.js application.

@@ -1,0 +1,4 @@
+DATABASE_URL=""
+DATABASE_AUTH_TOKEN=""
+CLOUDFLARE_WORKERS_API_URL=""
+CORS_ALLOWED_ORIGINS="" # Comma separated list of allowed origins

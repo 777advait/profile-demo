@@ -9,9 +9,12 @@ export const env = createEnv({
   server: {
     DATABASE_URL: z.string().url(),
     DATABASE_AUTH_TOKEN: z.string(),
-    NODE_ENV: z
-      .enum(["development", "test", "production"])
-      .default("development"),
+    // NODE_ENV: z
+    //   .enum(["development", "test", "production"])
+    //   .default("development"),
+    NODE_ENV: z.string().default("development"),
+    CLOUDFLARE_WORKERS_API_URL: z.string().url(),
+    CORS_ALLOWED_ORIGINS: z.string(),
   },
 
   /**
@@ -31,13 +34,15 @@ export const env = createEnv({
     DATABASE_URL: process.env.DATABASE_URL,
     DATABASE_AUTH_TOKEN: process.env.DATABASE_AUTH_TOKEN,
     NODE_ENV: process.env.NODE_ENV,
+    CLOUDFLARE_WORKERS_API_URL: process.env.CLOUDFLARE_WORKERS_API_URL,
+    CORS_ALLOWED_ORIGINS: process.env.CORS_ALLOWED_ORIGINS,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
    * useful for Docker builds.
    */
-  skipValidation: !!process.env.SKIP_ENV_VALIDATION,
+  skipValidation: !!process.env.NODE_ENV,
   /**
    * Makes it so that empty strings are treated as undefined. `SOME_VAR: z.string()` and
    * `SOME_VAR=''` will throw an error.
