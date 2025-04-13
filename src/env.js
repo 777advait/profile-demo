@@ -13,7 +13,6 @@ export const env = createEnv({
     //   .enum(["development", "test", "production"])
     //   .default("development"),
     NODE_ENV: z.string().default("development"),
-    CLOUDFLARE_WORKERS_API_URL: z.string().url(),
     CORS_ALLOWED_ORIGINS: z.string(),
   },
 
@@ -23,7 +22,7 @@ export const env = createEnv({
    * `NEXT_PUBLIC_`.
    */
   client: {
-    // NEXT_PUBLIC_CLIENTVAR: z.string(),
+    NEXT_PUBLIC_CLOUDFLARE_WORKERS_API_URL: z.string().url(),
   },
 
   /**
@@ -34,8 +33,8 @@ export const env = createEnv({
     DATABASE_URL: process.env.DATABASE_URL,
     DATABASE_AUTH_TOKEN: process.env.DATABASE_AUTH_TOKEN,
     NODE_ENV: process.env.NODE_ENV,
-    CLOUDFLARE_WORKERS_API_URL: process.env.CLOUDFLARE_WORKERS_API_URL,
     CORS_ALLOWED_ORIGINS: process.env.CORS_ALLOWED_ORIGINS,
+    NEXT_PUBLIC_CLOUDFLARE_WORKERS_API_URL: process.env.NEXT_PUBLIC_CLOUDFLARE_WORKERS_API_URL,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**

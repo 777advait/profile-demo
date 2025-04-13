@@ -9,6 +9,7 @@ import SuperJSON from "superjson";
 
 import { type AppRouter } from "~/server/api/root";
 import { createQueryClient } from "./query-client";
+import { env } from "~/env";
 
 let clientQueryClientSingleton: QueryClient | undefined = undefined;
 const getQueryClient = () => {
@@ -51,7 +52,10 @@ export function TRPCReactProvider(props: { children: React.ReactNode }) {
         }),
         httpBatchStreamLink({
           transformer: SuperJSON,
-          url: getBaseUrl() + "/api/trpc",
+          url:
+            (process.env.NODE_ENV === "production"
+              ? env.NEXT_PUBLIC_CLOUDFLARE_WORKERS_API_URL
+              : "http://localhost:8787") + "/api/trpc",
         }),
       ],
     }),
@@ -64,10 +68,4 @@ export function TRPCReactProvider(props: { children: React.ReactNode }) {
       </api.Provider>
     </QueryClientProvider>
   );
-}
-
-function getBaseUrl() {
-  if (process.env.NODE_ENV === "production")
-    return process.env.CLOUDFLARE_WORKERS_API_URL;
-  return `http://localhost:8787`;
 }
