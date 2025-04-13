@@ -21,7 +21,8 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "workers:dev": "bunx wrangler dev --config src/infra/cloudflare/wrangler.toml",
-    "workers:deploy": "bunx wrangler deploy --config src/infra/cloudflare/wrangler.toml"
+    "workers:deploy": "bunx wrangler deploy --config src/infra/cloudflare/wrangler.toml",
+    "workers:secret": "bunx wrangler secret put --config src/infra/cloudflare/wrangler.toml"
   },
   "dependencies": {
     "@dicebear/collection": "^9.2.2",
