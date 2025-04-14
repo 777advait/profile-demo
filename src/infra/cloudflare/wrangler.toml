@@ -1,4 +1,4 @@
 name = "profile-demo-api"
-main = "./trpcHandler.worker.ts"
+main = "../../server/api/entry.worker.ts"
 compatibility_date = "2025-04-01"
 compatibility_flags = [ "nodejs_compat" ]

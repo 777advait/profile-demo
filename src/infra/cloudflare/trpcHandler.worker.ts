@@ -85,9 +85,4 @@ class TRPCHandler {
   }
 }
 
-const handler = new TRPCHandler();
-
-export default {
-  fetch: async (req: Request) =>
-    await handler.requestHandler(req, appRouter, createTRPCContext),
-};
+export const trpcHandler = new TRPCHandler();
