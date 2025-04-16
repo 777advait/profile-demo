@@ -45,8 +45,9 @@ export const UserSchema = z.object({
     .optional()
     .transform((val) => (val ? val.trim() : undefined)),
   about: z
-    .string()
-    .min(1, { message: "About is required" })
-    .optional()
-    .transform((val) => (val ? val.trim() : undefined)),
+    .union([
+      z.string().transform((val) => (val ? JSON.parse(val) : undefined)),
+      z.object({}).passthrough(), // This allows any JSON object structure
+    ])
+    .optional(),
 });

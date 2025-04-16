@@ -35,6 +35,24 @@ export default class UserRepository implements IUserRepository {
     }
   }
 
+  async getUserAbout(username: string): Promise<SelectUser["about"]> {
+    try {
+      return (
+        (await this.db.query.userSchema.findFirst({
+          where: ({ username: dbUsername }, { eq }) => eq(dbUsername, username),
+          columns: { about: true },
+        })) ?? null
+      );
+    } catch (error) {
+      console.log("❌ Error in user repository: ", error);
+
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Internal server error",
+      });
+    }
+  }
+
   async addUser(data: InsertUser) {
     try {
       const [user] = await this.db.transaction(async (txn) => {

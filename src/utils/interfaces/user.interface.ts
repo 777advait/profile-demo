@@ -5,4 +5,5 @@ export interface IUserRepository {
   getUserByUsername(username: string): Promise<z.infer<typeof UserSchema>>;
   addUser(data: InsertUser): Promise<z.infer<typeof UserSchema>>;
   getUsernames(): Promise<SelectUser["username"][]>;
+  getUserAbout(username: string): Promise<SelectUser["about"]>;
 }

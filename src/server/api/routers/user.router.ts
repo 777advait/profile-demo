@@ -33,4 +33,11 @@ export const userRouter = createTRPCRouter({
     .query(({ input: { name } }) =>
       createAvatar(glass, { seed: name }).toDataUri(),
     ),
+
+  getUserAbout: publicProcedure
+    .input(z.object({ username: z.string() }))
+    .query(
+      async ({ ctx: { repository }, input: { username } }) =>
+        await repository.userRepository.getUserAbout(username),
+    ),
 });

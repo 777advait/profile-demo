@@ -2,7 +2,12 @@
 
 import "~/styles/tiptap.css";
 
-import { EditorContent, generateHTML, useEditor } from "@tiptap/react";
+import {
+  EditorContent,
+  generateHTML,
+  useEditor,
+  type JSONContent,
+} from "@tiptap/react";
 import { Button } from "../ui/button";
 import { List, ListOrdered, LinkIcon, X } from "lucide-react";
 import { useState } from "react";
@@ -40,8 +45,8 @@ export default function RichTextEditor({
   onChange,
 }: {
   placeholder: string;
-  currentContent: string;
-  onChange: (richText: string) => void;
+  currentContent: JSONContent;
+  onChange: (richText: JSONContent) => void;
 }) {
   const [linkUrl, setLinkUrl] = useState("");
   const [linkText, setLinkText] = useState("");
@@ -58,7 +63,7 @@ export default function RichTextEditor({
     ],
     content: "",
     onUpdate: ({ editor }) => {
-      onChange(JSON.stringify(editor.getJSON()));
+      onChange(editor.getJSON());
     },
     editorProps: {
       attributes: {

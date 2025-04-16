@@ -12,7 +12,7 @@ import { Button, ButtonLoading } from "./ui/button";
 import { api } from "~/trpc/react";
 import { toast } from "sonner";
 import RichTextEditor, { extensions } from "./tiptap";
-import { generateHTML } from "@tiptap/react";
+import { generateHTML, type JSONContent } from "@tiptap/react";
 
 export function ProfileForm() {
   const form = useForm<z.infer<typeof UserSchema>>({
@@ -196,7 +196,7 @@ export function ProfileForm() {
                 <div className="w-full rounded-2xl">
                   <RichTextEditor
                     placeholder="A short bio..."
-                    currentContent={form.getValues("about") as string}
+                    currentContent={form.getValues("about") as JSONContent}
                     onChange={field.onChange}
                   />
                 </div>
