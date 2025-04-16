@@ -24,12 +24,13 @@ export default function ProfileHeader({
   initialData?: z.infer<typeof UserSchema>;
 }) {
   const { data: user, isLoading: isUserLoading } =
-    api.user.getUserByUsername.useQuery({ username }, { initialData });
+    api.user.getUserByUsername.useQuery({ username });
 
-  const { data: avatar } = api.user.getUserAvatar.useQuery(
-    { name: user?.name ?? "" },
-    { enabled: !!user?.name },
-  );
+  const { data: avatar, isLoading: isAvatarLoading } =
+    api.user.getUserAvatar.useQuery(
+      { name: user?.name ?? "" },
+      { enabled: !!user?.name },
+    );
 
   const [content, setContent] = useState<string>("");
 
@@ -45,7 +46,7 @@ export default function ProfileHeader({
     }
   }, [user?.about]);
 
-  if ((!isUserLoading && !user) || !user) {
+  if (!isUserLoading && !user) {
     return notFound();
   }
 
@@ -69,12 +70,14 @@ export default function ProfileHeader({
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
           <AvatarComponent.Avatar className="border-ring size-24 border">
-            <AvatarComponent.AvatarImage src={avatar} alt={user.username} />
+            <AvatarComponent.AvatarImage src={avatar} alt={user?.username} />
             <AvatarComponent.AvatarFallback>
               {username[0]}
             </AvatarComponent.AvatarFallback>
           </AvatarComponent.Avatar>
+
           <div>
+            {/* User details with loading state */}
             {isUserLoading ? (
               <div className="space-y-2">
                 <Skeleton className="h-8 w-32" />
@@ -109,13 +112,14 @@ export default function ProfileHeader({
         </div>
         <MoreHorizontal />
       </div>
+
       {/* About section with its own loading state */}
       {isUserLoading ? (
         <div className="space-y-2">
           <Skeleton className="h-6 w-16" />
           <Skeleton className="h-16 w-full" />
         </div>
-      ) : user && user.about ? (
+      ) : user?.about ? (
         <div>
           <h2 className="text-xl font-medium">About</h2>
           <EditorContent editor={editor} />
