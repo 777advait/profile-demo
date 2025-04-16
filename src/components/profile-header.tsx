@@ -23,14 +23,15 @@ export default function ProfileHeader({
   username: string;
   initialData?: z.infer<typeof UserSchema>;
 }) {
-  const { data: user, isLoading: isUserLoading } =
-    api.user.getUserByUsername.useQuery({ username });
+  const {
+    data: user,
+    isLoading: isUserLoading,
+    isError,
+  } = api.user.getUserByUsername.useQuery({ username }, { initialData });
 
-  const { data: avatar, isLoading: isAvatarLoading } =
-    api.user.getUserAvatar.useQuery(
-      { name: user?.name ?? "" },
-      { enabled: !!user?.name },
-    );
+  const { data: avatar } = api.user.getUserAvatar.useQuery({
+    name: initialData?.name ?? "",
+  });
 
   const [content, setContent] = useState<string>("");
 
@@ -45,6 +46,10 @@ export default function ProfileHeader({
       }
     }
   }, [user?.about]);
+
+  if (isError) {
+    return <div>Error loading user</div>;
+  }
 
   if (!isUserLoading && !user) {
     return notFound();
