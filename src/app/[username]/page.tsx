@@ -14,29 +14,25 @@ export default async function ProfilePage({
 }) {
   const { username } = await params;
 
-  let user: z.infer<typeof UserSchema> | null = null;
   try {
-    user = await api.user.getUserByUsername({ username });
+    const user = await api.user.getUserByUsername({ username });
+    return (
+      <HydrateClient>
+        <main>
+          <Container className="max-w-xl">
+            <ProfileHeader username={username} initialData={user} />
+          </Container>
+        </main>
+      </HydrateClient>
+    );
   } catch (error) {
-    console.log("❌ Error in profile page: ", error);
-    if (error instanceof TRPCError && error.code === "BAD_REQUEST") {
+    if (error instanceof TRPCError && error.code === "NOT_FOUND") {
       return notFound();
     }
 
-    return (
-      <div className="text-destructive text-center">
-        Failed to fetch the user. Please try again
-      </div>
-    );
-  }
+    if (error instanceof Error)
+      return <div>Error loading user: {error.message}</div>;
 
-  return (
-    <HydrateClient>
-      <main>
-        <Container className="max-w-xl">
-          <ProfileHeader username={username} initialData={user} />
-        </Container>
-      </main>
-    </HydrateClient>
-  );
+    return <div>Error loading user</div>;
+  }
 }

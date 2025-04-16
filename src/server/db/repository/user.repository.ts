@@ -20,7 +20,7 @@ export default class UserRepository implements IUserRepository {
       });
 
       if (!user) {
-        throw new TRPCError({ code: "BAD_REQUEST", message: "User not found" });
+        throw new TRPCError({ code: "NOT_FOUND", message: "User not found" });
       }
 
       return cleanNulls(user) as z.infer<typeof UserSchema>;

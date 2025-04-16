@@ -26,8 +26,16 @@ export default function ProfileHeader({
   const {
     data: user,
     isLoading: isUserLoading,
-    isError,
+    error: userError,
   } = api.user.getUserByUsername.useQuery({ username }, { initialData });
+
+  if (userError) {
+    if (userError.data?.code === "NOT_FOUND") {
+      return notFound();
+    }
+
+    return <div>Error loading user: {userError.message}</div>;
+  }
 
   const { data: avatar } = api.user.getUserAvatar.useQuery({
     name: initialData?.name ?? "",
@@ -46,10 +54,6 @@ export default function ProfileHeader({
       }
     }
   }, [user?.about]);
-
-  if (isError) {
-    return <div>Error loading user</div>;
-  }
 
   if (!isUserLoading && !user) {
     return notFound();
